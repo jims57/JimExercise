@@ -1,3 +1,5 @@
+const ContactService = require('../service/contact');
+
 module.exports = {
     index: async (ctx, next) => {
         ctx.response.body = '<h1>Index Page!</h1>';
@@ -6,7 +8,11 @@ module.exports = {
         var a = ctx;
     },
     postcontact: async (ctx, next) => {
-        var a = ctx;
+        let { name, password } = ctx.request.body;
+        console.log('1');
+        let data = ContactService.postcontact(name, password);
+        console.log(data);
+        console.log('2');
     },
     putContact: async (ctx, next) => {
         var a = ctx;
