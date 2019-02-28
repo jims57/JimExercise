@@ -2,7 +2,12 @@ const ContactService = require('../service/contact');
 
 module.exports = {
     index: async (ctx, next) => {
-        ctx.response.body = '<h1>Index Page!</h1>';
+        console.log('1');
+        await ContactService.index(ctx, next);
+        console.log('4');
+        // await ctx.render('contact/contact',{
+        //     name: 'jims58'
+        // });
     },
     listContact: async (ctx, next) => {
         var a = ctx;

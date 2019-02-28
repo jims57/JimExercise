@@ -1,9 +1,11 @@
 module.exports = {
     index: async (ctx, next) => {
-        let data;
-        data = 'd1';
+        console.log('2');
+        await ctx.render('contact/contact',{
+            name: 'jims58'
+        });
 
-        return data;
+        console.log('3');
     },
     listContact: async (ctx, next) => {
         var a = ctx;
