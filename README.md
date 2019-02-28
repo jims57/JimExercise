@@ -1,2 +1,2 @@
 # JimExercise
-This is just a exercise project, please don't follow.
+This is just an exercise project, please don't follow.
