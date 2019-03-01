@@ -4,20 +4,15 @@ const koa = require('koa');
 const app = new koa();
 const bodyParser = require('koa-bodyparser');
 const router = require('./router');
-// const nunjucks = require('koa-nunjucks-2');
 const templateEngine = require('./middlewares/template-engine');
-const path = require('path');
+const resourceProvider = require('./middlewares/resource-provider');
 
 //Use bodyParser middleware
 app.use(bodyParser());
 
+// Load custom middlewares
 templateEngine(app, workingFolder);
-
-//Use koa-static middleware
-const staticFiles = require('koa-static');
-app.use(staticFiles(path.resolve(__dirname, './public'),{
-  maxage: 30 * 24 * 60 * 60 * 1000
-}));
+resourceProvider(app, workingFolder);
 
 //Use router middleware
 router(app);
