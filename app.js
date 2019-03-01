@@ -1,21 +1,17 @@
+const workingFolder = __dirname;
+
 const koa = require('koa');
 const app = new koa();
 const bodyParser = require('koa-bodyparser');
 const router = require('./router');
-const nunjucks = require('koa-nunjucks-2');
+// const nunjucks = require('koa-nunjucks-2');
+const templateEngine = require('./middlewares/template-engine');
 const path = require('path');
 
 //Use bodyParser middleware
 app.use(bodyParser());
 
-// Use nunjucks template engine
-app.use(nunjucks({
-    ext: 'html',
-    path: path.join(__dirname, 'views'),
-    nunjucksConfig: {
-      trimBlocks: true
-    }
-}));
+templateEngine(app, workingFolder);
 
 //Use koa-static middleware
 const staticFiles = require('koa-static');
@@ -30,9 +26,6 @@ const Sequelize = require('sequelize');
 //Aliyun mySql
 const sequelize = new Sequelize('expedia', 'root', 'ABC123abc123', {
     host: 'rm-rj9w7v7837kx122z6po.mysql.rds.aliyuncs.com',
-    //Local mySql
-    // const sequelize = new Sequelize('expedia', 'root', 'ABC123456', {
-    //     host: 'localhost',
     dialect: 'mysql',
     pool: {
         max: 5,
