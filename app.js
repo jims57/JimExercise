@@ -51,7 +51,7 @@ sequelize
       console.error('Connect failed');
   });
 
-  const Contacts = require('./model/contacts');
+  const Contacts = require('./models/contacts');
   var cons =  Contacts(sequelize, Sequelize);
 
   cons.findOne({
