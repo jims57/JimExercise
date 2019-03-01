@@ -1,5 +1,18 @@
+const Sequelize = require('sequelize');
+
 module.exports = {
     index: async (ctx, next) => {
+
+        const Contacts = require('../models/contacts');
+        var cons =  Contacts(ctx.JDB, Sequelize);
+      
+        cons.findOne({
+          attributes: ['Name']
+        }).then(Contact => {
+          var a = 1;
+      
+        })
+
         await ctx.render('contact/contact',{
             name: 'jims58'
         });
