@@ -51,10 +51,14 @@ sequelize
       console.error('Connect failed');
   });
 
-sequelize.query("SELECT UserID, Title, Name, BirthDate, IsFavorite FROM `contacts` where Name ='User 2'", { type: sequelize.QueryTypes.SELECT})
-  .then(users => {
-    var u = users;
-    // let{}
+  const Contacts = require('./model/contacts');
+  var cons =  Contacts(sequelize, Sequelize);
+
+  cons.findOne({
+    attributes: ['Name']
+  }).then(Contact => {
+    var a = 1;
+
   })
 
 //Launch server at port 3000
