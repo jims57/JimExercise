@@ -21,7 +21,7 @@ router(app);
 
 const sequelize = dbConnector.initDB();
 sequelize.then((sequelize) =>{
-  app.context.JDB = sequelize;
+  app.context.DB = sequelize;
 
   console.log('Trying to launch server, please wait!');
 

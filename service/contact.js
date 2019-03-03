@@ -1,12 +1,11 @@
 const Sequelize = require('sequelize');
+const Contacts = require('../models/contact');
 
 module.exports = {
     index: async (ctx, next) => {
-
-        const Contacts = require('../models/contacts');
-        var cons =  Contacts(ctx.JDB, Sequelize);
+        var contactEntity =  Contacts(ctx.DB, Sequelize);
       
-        cons.findOne({
+        contactEntity.findOne({
           attributes: ['Name']
         }).then(Contact => {
           var a = 1;
@@ -22,9 +21,11 @@ module.exports = {
     listContact: async (ctx, next) => {
         var a = ctx;
     },
-    postcontact: async (name, pwd) => {
+    postcontact: async (ctx, next) => {
         let data;
         data = 'd1';
+
+        let { name, age } = ctx.request.body;
 
         return data;
     },

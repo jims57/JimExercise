@@ -8,9 +8,9 @@ module.exports = {
         var a = ctx;
     },
     postcontact: async (ctx, next) => {
-        let { name, password } = ctx.request.body;
+        //let { name, age } = ctx.request.body;
         
-        let data = ContactService.postcontact(name, password);
+        let data = ContactService.postcontact(ctx, next);
         console.log(data);
 
     },
