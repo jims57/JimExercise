@@ -98,11 +98,16 @@ module.exports = {
                 sortingColName = 'UserID';
         }
 
-        var sqlString = 'select (select count(*) from contact) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount from contact c ';
+        // var sqlString = 'select (select count(*) from contact) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount from contact c ';
+
+        var sqlString = 'select distinct (select count(*) from (select distinct c.UserID from contact c, contactdetail cd where c.UserID = cd.UserID and c.Name like "%' + searchText + '%") a) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount, cd.ContactDetailType, cd.ContactDetailContent ';
+        sqlString += 'from contact c, contactdetail cd ';
+        sqlString +='where c.UserID = cd.UserID '; // Appended where clause
+
         // When search text is input, meaning query contact's name
         if(searchText !='')
         {
-            sqlString +='where Name like "%' + searchText + '%" ';
+            sqlString +='and c.Name like "%' + searchText + '%" '; // Appended name search clause
         }
         sqlString += 'order by c.' + sortingColName + ' ' + sortingColCondition + ' limit ' + pageIndex + ', ' + pageSize + '';
 

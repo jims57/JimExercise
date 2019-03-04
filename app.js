@@ -15,6 +15,18 @@ app.use(bodyParser());
 // Load custom middlewares
 templateEngine(app, workingFolder);
 resourceProvider(app, workingFolder);
+// const staticFiles = require('koa-static');
+// const path = require('path');
+// app.use(staticFiles(path.resolve(workingFolder, './public'),{
+//   maxage: 30 * 24 * 60 * 60 * 1000
+// }));
+
+// module.exports = (app, workingFolder) => {
+//     app.use(staticFiles(path.resolve(workingFolder, './public'),{
+//         maxage: 30 * 24 * 60 * 60 * 1000
+//       }));
+// }
+
 
 //Use router middleware
 router(app);
