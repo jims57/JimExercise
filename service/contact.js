@@ -98,7 +98,13 @@ module.exports = {
                 sortingColName = 'UserID';
         }
 
-        var sqlString = 'select (select count(*) from contact) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount from contact c order by c.' + sortingColName + ' ' + sortingColCondition + ' limit ' + pageIndex + ', ' + pageSize + '';
+        var sqlString = 'select (select count(*) from contact) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount from contact c ';
+        // When search text is input, meaning query contact's name
+        if(searchText !='')
+        {
+            sqlString +='where Name like "%' + searchText + '%" ';
+        }
+        sqlString += 'order by c.' + sortingColName + ' ' + sortingColCondition + ' limit ' + pageIndex + ', ' + pageSize + '';
 
         await ctx.DB.query(sqlString, { type: ctx.DB.QueryTypes.SELECT })
                     .then(contacts => {
