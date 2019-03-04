@@ -4,11 +4,12 @@ const ContactController = require('./controller/contact');
 module.exports = (app) =>{
     router
     .get('/', ContactController.index)
-    .get('/users', ContactController.listContact)
-    .post('/users', ContactController.postcontact)
-    .put('/users/:id', ContactController.putContact)
-    .del('/users/:id', ContactController.delContact)
-    .all('/users/:id', ContactController.allContact);
+    .get('/countact', ContactController.listContact)
+    .post('/contact', ContactController.postcontact)
+    .put('/contact', ContactController.putContact)
+    .del('/contact/:id', ContactController.delContact)
+    //Datagrid related router
+    .get('/handleContact', ContactController.handleContact);
 
     //Load middlewares used in server
     app

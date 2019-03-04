@@ -10,6 +10,9 @@
         .on( 'page.dt',   pageHandler)
         .DataTable({
             "paging": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/handleContact",
             "columns": [
                             { "searchable": true },
                             { "searchable": false },

@@ -5,12 +5,12 @@ module.exports = {
         await ContactService.index(ctx, next);
     },
     listContact: async (ctx, next) => {
-        await ContactService.listContact(ctx, next);
+        var a = ctx;
     },
     postcontact: async (ctx, next) => {
-        //let { name, age } = ctx.request.body;
+        let { name, password } = ctx.request.body;
         
-        let data = ContactService.postcontact(ctx, next);
+        let data = ContactService.postcontact(name, password);
         console.log(data);
 
     },
@@ -20,7 +20,7 @@ module.exports = {
     delContact: async (ctx, next) => {
         var a = ctx;
     },
-    allContact: async (ctx, next) => {
-        var a = ctx;
+    handleContact: async (ctx, next) => {
+        await ContactService.handleContact(ctx, next);
     }
 };
