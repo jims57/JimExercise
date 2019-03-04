@@ -9,7 +9,15 @@
         .on( 'search.dt', searchHandler )
         .on( 'page.dt',   pageHandler)
         .DataTable({
-            "paging": true
+            "paging": true,
+            "columns": [
+                            { "searchable": true },
+                            { "searchable": false },
+                            { "searchable": false },
+                            { "searchable": false },
+                            { "searchable": false },
+                            { "searchable": false }
+                        ]
         });
     }); 
 
