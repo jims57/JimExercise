@@ -5,39 +5,33 @@
 <script type="text/javascript" class="init">
     $(document).ready(function() {
         $('#example')
-        .on( 'order.dt',  orderHandler)
-        .on( 'search.dt', searchHandler )
-        .on( 'page.dt',   pageHandler)
         .DataTable({
             "paging": true,
             "processing": true,
             "serverSide": true,
             "ajax": "/handleContact",
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": true,
+                    "searchable": false
+                }
+            ],
             "columns": [
-                            { "searchable": true },
-                            { "searchable": false },
-                            { "searchable": false },
-                            { "searchable": false },
-                            { "searchable": false },
-                            { "searchable": false }
-                        ]
+                { "data": "UserID" },
+                { "data": "Title" },
+                { "data": "Name" },
+                { "data": "Age" },
+                { "data": "FavoriteFlag" },
+                { "data": "ContactDetailCount" }
+            ]
         });
     }); 
-
-    function orderHandler(e, setting){
-        var p1 = e;
-        var p2 = setting;
-        //var order = table.order();
-        console.log('Order..');
-    };
-
-    function searchHandler(){
-        console.log('search..');
-    };
-
-    function pageHandler(){
-        console.log('page..');
-    };
 </script>
 
 <header class="footer">
