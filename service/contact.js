@@ -3,22 +3,30 @@ const Contacts = require('../models/contact');
 
 module.exports = {
     index: async (ctx, next) => {
-        var contactEntity =  Contacts(ctx.DB, Sequelize);
-      
-        contactEntity.findOne({
-          attributes: ['Name']
-        }).then(Contact => {
-          var a = 1;
-      
-        })
+
 
         await ctx.render('contact/contact',{
-            name: 'jims58'
+            userName: 'jims58-8'
         });
 
         console.log('3');
     },
     listContact: async (ctx, next) => {
+        var orderField = 'UserID';
+
+        var contactEntity =  Contacts(ctx.DB, Sequelize);
+
+        await contactEntity.findAll({
+            limit: 20,
+            attributes: ['UserID', 'Title', 'Name', 'BirthDate', 'IsFavorite'],
+            order: [
+                [orderField, 'DESC']
+            ]
+          }).then(contacts => {
+            var a = 1;
+        
+          });
+
         var a = ctx;
     },
     postcontact: async (ctx, next) => {

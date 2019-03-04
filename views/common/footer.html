@@ -1,3 +1,34 @@
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#example')
+        .on( 'order.dt',  orderHandler)
+        .on( 'search.dt', searchHandler )
+        .on( 'page.dt',   pageHandler)
+        .DataTable({
+            "paging": true
+        });
+    }); 
+
+    function orderHandler(e, setting){
+        var p1 = e;
+        var p2 = setting;
+        //var order = table.order();
+        console.log('Order..');
+    };
+
+    function searchHandler(){
+        console.log('search..');
+    };
+
+    function pageHandler(){
+        console.log('page..');
+    };
+</script>
+
 <header class="footer">
         <div class="header-box wraper">Expedia Exercise | <span class="logo">© Jim</span></div>
 </header>

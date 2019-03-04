@@ -5,7 +5,7 @@ module.exports = {
         await ContactService.index(ctx, next);
     },
     listContact: async (ctx, next) => {
-        var a = ctx;
+        await ContactService.listContact(ctx, next);
     },
     postcontact: async (ctx, next) => {
         //let { name, age } = ctx.request.body;
