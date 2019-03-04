@@ -99,8 +99,13 @@ module.exports = {
         }
 
         // var sqlString = 'select (select count(*) from contact) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount from contact c ';
-
-        var sqlString = 'select distinct (select count(*) from (select distinct c.UserID from contact c, contactdetail cd where c.UserID = cd.UserID and c.Name like "%' + searchText + '%") a) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount, cd.ContactDetailType, cd.ContactDetailContent ';
+        var sqlString = 'select totalCount, UserID, Title, Name, Age, IsFavorite as FavoriteFlag, ContactDetailCount, ContactDetailType, ContactDetailContent from (';
+        sqlString += 'select distinct (select count(*) from (select distinct c.UserID from contact c, contactdetail cd where c.UserID = cd.UserID ';
+        if(searchText !='')
+        {
+            sqlString += 'and c.Name like "%' + searchText + '%"';
+        }
+        sqlString += ') a) as totalCount, c.UserID, c.Title, Name, BirthDate, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount, cd.ContactDetailType, cd.ContactDetailContent ';
         sqlString += 'from contact c, contactdetail cd ';
         sqlString +='where c.UserID = cd.UserID '; // Appended where clause
 
@@ -109,7 +114,7 @@ module.exports = {
         {
             sqlString +='and c.Name like "%' + searchText + '%" '; // Appended name search clause
         }
-        sqlString += 'order by c.' + sortingColName + ' ' + sortingColCondition + ' limit ' + pageIndex + ', ' + pageSize + '';
+        sqlString += ') cc order by cc.' + sortingColName + ' ' + sortingColCondition + ' limit ' + pageIndex + ', ' + pageSize + '';
 
         await ctx.DB.query(sqlString, { type: ctx.DB.QueryTypes.SELECT })
                     .then(contacts => {
