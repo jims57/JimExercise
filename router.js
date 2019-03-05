@@ -11,7 +11,7 @@ module.exports = (app) =>{
     //Datagrid related router
     .get('/handleContact', ContactController.handleContact);
 
-    //Load middlewares used in server
+    //Load middlewares used in this server
     app
     .use(router.routes()) //Load koa-router middleware
     .use(router.allowedMethods()); //Allow to handle the exception status codes

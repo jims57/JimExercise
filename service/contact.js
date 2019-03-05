@@ -4,42 +4,21 @@ const Contacts = require('../models/contact');
 module.exports = {
     index: async (ctx, next) => {
         await ctx.render('contact/contact',{
-            userName: 'jims58-8'
+            author: 'Jim Gan',
+            GitHubLink: 'https://github.com/jims57/JimExercise'
         });
-
-        console.log('3');
     },
     listContact: async (ctx, next) => {
-        var orderField = 'UserID';
-
-        var contactEntity =  Contacts(ctx.DB, Sequelize);
-
-        await contactEntity.findAll({
-            limit: 20,
-            attributes: ['UserID', 'Title', 'Name', 'BirthDate', 'IsFavorite'],
-            order: [
-                [orderField, 'DESC']
-            ]
-          }).then(contacts => {
-            var a = 1;
-        
-          });
-
-        var a = ctx;
+        // Todo, future use
     },
     postcontact: async (ctx, next) => {
-        let data;
-        data = 'd1';
-
-        let { name, age } = ctx.request.body;
-
-        return data;
+       // Todo, future use
     },
     putContact: async (ctx, next) => {
-        var a = ctx;
+       // Todo, future use
     },
     delContact: async (ctx, next) => {
-        var a = ctx;
+       // Todo, future use
     },
     handleContact: async (ctx, next) => {
         var drawID = parseInt(ctx.query.draw); // Get old draw number, we have to get different draw ID to update the datagrid
@@ -59,6 +38,7 @@ module.exports = {
             }
         });
 
+        // Get search related info
         var sortingColIndexArray = conditionArray[0].split('=');
         var sortingColConditionArray = conditionArray[1].split('=');
         var searchArray = conditionArray[2].split('=');
@@ -98,7 +78,7 @@ module.exports = {
                 sortingColName = 'UserID';
         }
 
-        // var sqlString = 'select (select count(*) from contact) as totalCount, c.UserID, c.Title, Name, FLOOR(DATEDIFF (NOW(), BirthDate)/365) AS Age, c.IsFavorite As FavoriteFlag, (select count(UserID) from contactdetail where contactdetail.UserID = c.UserID) as ContactDetailCount from contact c ';
+        // Build query string for MySql
         var sqlString = 'select totalCount, UserID, Title, Name, Age, IsFavorite as FavoriteFlag, ContactDetailCount, ContactDetailType, ContactDetailContent from (';
         sqlString += 'select distinct (select count(*) from (select distinct c.UserID from contact c, contactdetail cd where c.UserID = cd.UserID ';
         if(searchText !='')
@@ -116,6 +96,7 @@ module.exports = {
         }
         sqlString += ') cc order by cc.' + sortingColName + ' ' + sortingColCondition + ' limit ' + pageIndex + ', ' + pageSize + '';
 
+        // Execute query by db entity
         await ctx.DB.query(sqlString, { type: ctx.DB.QueryTypes.SELECT })
                     .then(contacts => {
                         var contactsString = JSON.stringify(contacts);

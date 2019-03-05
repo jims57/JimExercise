@@ -5,20 +5,16 @@ module.exports = {
         await ContactService.index(ctx, next);
     },
     listContact: async (ctx, next) => {
-        var a = ctx;
+       // Todo, future use
     },
     postcontact: async (ctx, next) => {
-        let { name, password } = ctx.request.body;
-        
-        let data = ContactService.postcontact(name, password);
-        console.log(data);
-
+       // Todo, future use
     },
     putContact: async (ctx, next) => {
-        var a = ctx;
+       // Todo, future use
     },
     delContact: async (ctx, next) => {
-        var a = ctx;
+       // Todo, future use
     },
     handleContact: async (ctx, next) => {
         await ContactService.handleContact(ctx, next);

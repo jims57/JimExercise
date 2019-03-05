@@ -9,7 +9,6 @@
     "koa-nunjucks-2": "^3.0.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "koa-views": "^6.1.5",
     "mysql2": "^1.6.5",
     "promise": "^8.0.2",
     "sequelize": "^4.43.0",

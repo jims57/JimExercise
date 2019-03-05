@@ -1,5 +1,7 @@
+// Variables needed to run this application
 const workingFolder = __dirname;
 
+// Load modules and middlewares
 const koa = require('koa');
 const app = new koa();
 const bodyParser = require('koa-bodyparser');
@@ -15,28 +17,16 @@ app.use(bodyParser());
 // Load custom middlewares
 templateEngine(app, workingFolder);
 resourceProvider(app, workingFolder);
-// const staticFiles = require('koa-static');
-// const path = require('path');
-// app.use(staticFiles(path.resolve(workingFolder, './public'),{
-//   maxage: 30 * 24 * 60 * 60 * 1000
-// }));
-
-// module.exports = (app, workingFolder) => {
-//     app.use(staticFiles(path.resolve(workingFolder, './public'),{
-//         maxage: 30 * 24 * 60 * 60 * 1000
-//       }));
-// }
-
-
-//Use router middleware
 router(app);
 
+// Init DB connector to MySql
 const sequelize = dbConnector.initDB();
 sequelize.then((sequelize) =>{
   app.context.DB = sequelize;
 
   console.log('Trying to launch server, please wait!');
 
+  // Launch server at port 3000
   app.listen(3000,() => {
     console.log('Server is started successfully. Running...');
   });
