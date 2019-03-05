@@ -9,7 +9,6 @@ const router = require('./router');
 const templateEngine = require('./middlewares/template-engine');
 const resourceProvider = require('./middlewares/resource-provider');
 const dbConnector = require('./middlewares/db-connector');
-const Sequelize = require('sequelize');
 
 //Use bodyParser middleware
 app.use(bodyParser());
