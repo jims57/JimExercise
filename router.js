@@ -8,11 +8,11 @@ module.exports = (app) =>{
     .post('/contact', ContactController.postcontact)
     .put('/contact', ContactController.putContact)
     .del('/contact/:id', ContactController.delContact)
-    //Datagrid related router
+    // Datagrid related router
     .get('/handleContact', ContactController.handleContact);
 
-    //Load middlewares used in this server
+    // Load middlewares used in this server
     app
-    .use(router.routes()) //Load koa-router middleware
-    .use(router.allowedMethods()); //Allow to handle the exception status codes
+    .use(router.routes()) // Load koa-router middleware
+    .use(router.allowedMethods()); // Allow to handle the exception status codes
 };

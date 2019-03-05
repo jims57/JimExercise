@@ -100,7 +100,7 @@ module.exports = {
         await ctx.DB.query(sqlString, { type: ctx.DB.QueryTypes.SELECT })
                     .then(contacts => {
                         var contactsString = JSON.stringify(contacts);
-                        var showTotal = contacts.length; // How many record to be showed in a single page
+                        var showTotal = contacts.length; // How many records to be showed in a single page
                         var totalCount = 0;
 
                         if(showTotal >0)

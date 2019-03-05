@@ -10,10 +10,8 @@ const templateEngine = require('./middlewares/template-engine');
 const resourceProvider = require('./middlewares/resource-provider');
 const dbConnector = require('./middlewares/db-connector');
 
-//Use bodyParser middleware
+// Use modules and middlewares
 app.use(bodyParser());
-
-// Load custom middlewares
 templateEngine(app, workingFolder);
 resourceProvider(app, workingFolder);
 router(app);

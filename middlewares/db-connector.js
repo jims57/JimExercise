@@ -11,8 +11,11 @@ const sequelize = new Sequelize('expedia', 'root', 'ABC123abc123', {
     }
 });
 
+// This module is used for connecting to MySql with the help of sequelize
 exports.initDB = () => {
     console.log('Trying to connect to MySql...')
+
+    // Create Promise object to make sure connection is created successfully
     var p = new Promise((resolve, reject) => {
         sequelize
             .authenticate()
