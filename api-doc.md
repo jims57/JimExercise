@@ -177,6 +177,167 @@ else:
     print("错误:", result["error"])
 ```
 
+## 调用示例（Objective-C）
+```objective-c
+#import <Foundation/Foundation.h>
+
+// 读取图片并转换为base64
+NSString* imageToBase64(UIImage* image) {
+    NSData *imageData = UIImagePNGRepresentation(image);
+    return [imageData base64EncodedStringWithOptions:0];
+}
+
+// 发送OCR请求
+- (void)performOCR {
+    // 准备图片
+    UIImage *image = [UIImage imageNamed:@"example.png"];
+    NSString *base64String = imageToBase64(image);
+    
+    // 准备请求数据
+    NSDictionary *requestBody = @{
+        @"image": base64String,
+        @"lang": @"ch"
+    };
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestBody
+                                                      options:0
+                                                        error:&error];
+    
+    // 创建请求
+    NSURL *url = [NSURL URLWithString:@"http://your-api-domain/ocr"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.HTTPBody = jsonData;
+    
+    // 发送请求
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+            return;
+        }
+        
+        // 处理响应
+        NSError *jsonError;
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data
+                                                             options:0
+                                                               error:&jsonError];
+        
+        if ([result[@"status_code"] integerValue] == 200) {
+            // 处理识别结果
+            NSArray *texts = result[@"data"][@"texts"];
+            NSLog(@"识别的文字: %@", texts);
+        } else {
+            NSLog(@"错误: %@", result[@"error"]);
+        }
+    }];
+    
+    [task resume];
+}
+```
+
+## 调用示例（Android Java）
+```java
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import java.io.ByteArrayOutputStream;
+import okhttp3.*;
+import org.json.JSONObject;
+import java.io.IOException;
+
+public class OCRExample {
+    private static final String API_URL = "http://your-api-domain/ocr";
+    private OkHttpClient client = new OkHttpClient();
+
+    // 将Bitmap转换为Base64
+    private String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    // 执行OCR识别
+    public void performOCR(Bitmap image) {
+        // 准备请求数据
+        String base64Image = bitmapToBase64(image);
+        
+        JSONObject requestBody = new JSONObject();
+        try {
+            requestBody.put("image", base64Image);
+            requestBody.put("lang", "ch");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // 创建请求
+        RequestBody body = RequestBody.create(
+            MediaType.parse("application/json"), requestBody.toString());
+            
+        Request request = new Request.Builder()
+            .url(API_URL)
+            .post(body)
+            .build();
+
+        // 发送请求
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                }
+
+                String responseData = response.body().string();
+                try {
+                    JSONObject result = new JSONObject(responseData);
+                    if (result.getInt("status_code") == 200) {
+                        // 处理识别结果
+                        JSONObject data = result.getJSONObject("data");
+                        JSONArray texts = data.getJSONArray("texts");
+                        
+                        // 在主线程更新UI
+                        runOnUiThread(() -> {
+                            StringBuilder sb = new StringBuilder();
+                            for (int i = 0; i < texts.length(); i++) {
+                                try {
+                                    sb.append(texts.getString(i)).append("\n");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            // 更新UI显示识别结果
+                            // textView.setText(sb.toString());
+                        });
+                    } else {
+                        String error = result.getString("error");
+                        // 处理错误
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    // 示例调用
+    public void example() {
+        // 从资源加载图片
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.example);
+        performOCR(bitmap);
+    }
+}
+```
+
 ## 响应结果说明
 在成功的响应示例中：
 1. `results`数组包含了每个识别文本的位置信息：
