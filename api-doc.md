@@ -97,13 +97,45 @@
 }
 ```
 
+```json
+{
+    "status_code": 400,
+    "message": "Invalid language code",
+    "error": "Supported languages are: ch, en, fr, german, korean, japan"
+}
+```
+
+```json
+{
+    "status_code": 400,
+    "message": "Invalid input",
+    "error": "Empty base64 string"
+}
+```
+
+```json
+{
+    "status_code": 400,
+    "message": "Invalid input",
+    "error": "Invalid image format"
+}
+```
+
+```json
+{
+    "status_code": 500,
+    "message": "Internal server error",
+    "error": "Failed to initialize OCR model"
+}
+```
+
 ## 错误码说明
 
 | 状态码 | 说明                                          |
 |--------|---------------------------------------------|
 | 200    | 请求成功                                      |
-| 400    | 请求参数错误（无效的base64编码或不支持的语言等） |
-| 500    | 服务器内部错误                                |
+| 400    | 请求参数错误（包括：无效的base64编码、不支持的语言、空base64字符串、无效的图片格式） |
+| 500    | 服务器内部错误（包括：OCR模型初始化失败、图片处理错误等）  |
 
 ## 注意事项
 1. base64图片编码支持带前缀（如：`data:image/png;base64,`）和不带前缀的格式
