@@ -1,0 +1,107 @@
+# Whisper Supported Languages
+
+According to OpenAI's official documentation, Whisper supports 99 languages. Here's the complete list of languages supported by Whisper:
+
+| No. | Language | 语言 |
+|-----|----------|------|
+| 1 | Afrikaans | 南非荷兰语 |
+| 2 | Arabic | 阿拉伯语 |
+| 3 | Armenian | 亚美尼亚语 |
+| 4 | Azerbaijani | 阿塞拜疆语 |
+| 5 | Belarusian | 白俄罗斯语 |
+| 6 | Bosnian | 波斯尼亚语 |
+| 7 | Bulgarian | 保加利亚语 |
+| 8 | Catalan | 加泰罗尼亚语 |
+| 9 | Chinese (Mandarin) | 中文（普通话）|
+| 10 | Croatian | 克罗地亚语 |
+| 11 | Czech | 捷克语 |
+| 12 | Danish | 丹麦语 |
+| 13 | Dutch | 荷兰语 |
+| 14 | English | 英语 |
+| 15 | Estonian | 爱沙尼亚语 |
+| 16 | Finnish | 芬兰语 |
+| 17 | French | 法语 |
+| 18 | Galician | 加利西亚语 |
+| 19 | German | 德语 |
+| 20 | Greek | 希腊语 |
+| 21 | Hebrew | 希伯来语 |
+| 22 | Hindi | 印地语 |
+| 23 | Hungarian | 匈牙利语 |
+| 24 | Icelandic | 冰岛语 |
+| 25 | Indonesian | 印度尼西亚语 |
+| 26 | Italian | 意大利语 |
+| 27 | Japanese | 日语 |
+| 28 | Kannada | 卡纳达语 |
+| 29 | Kazakh | 哈萨克语 |
+| 30 | Korean | 韩语 |
+| 31 | Latvian | 拉脱维亚语 |
+| 32 | Lithuanian | 立陶宛语 |
+| 33 | Macedonian | 马其顿语 |
+| 34 | Malay | 马来语 |
+| 35 | Marathi | 马拉地语 |
+| 36 | Maori | 毛利语 |
+| 37 | Nepali | 尼泊尔语 |
+| 38 | Norwegian | 挪威语 |
+| 39 | Persian | 波斯语 |
+| 40 | Polish | 波兰语 |
+| 41 | Portuguese | 葡萄牙语 |
+| 42 | Romanian | 罗马尼亚语 |
+| 43 | Russian | 俄语 |
+| 44 | Serbian | 塞尔维亚语 |
+| 45 | Slovak | 斯洛伐克语 |
+| 46 | Slovenian | 斯洛文尼亚语 |
+| 47 | Spanish | 西班牙语 |
+| 48 | Swahili | 斯瓦希里语 |
+| 49 | Swedish | 瑞典语 |
+| 50 | Tagalog | 他加禄语 |
+| 51 | Tamil | 泰米尔语 |
+| 52 | Thai | 泰语 |
+| 53 | Turkish | 土耳其语 |
+| 54 | Ukrainian | 乌克兰语 |
+| 55 | Urdu | 乌尔都语 |
+| 56 | Vietnamese | 越南语 |
+| 57 | Welsh | 威尔士语 |
+| 58 | Bengali | 孟加拉语 |
+| 59 | Georgian | 格鲁吉亚语 |
+| 60 | Gujarati | 古吉拉特语 |
+| 61 | Kyrgyz | 吉尔吉斯语 |
+| 62 | Maltese | 马耳他语 |
+| 63 | Malayalam | 马拉雅拉姆语 |
+| 64 | Mongolian | 蒙古语 |
+| 65 | Punjabi | 旁遮普语 |
+| 66 | Sinhala | 僧伽罗语 |
+| 67 | Telugu | 泰卢固语 |
+| 68 | Uzbek | 乌兹别克语 |
+| 69 | Albanian | 阿尔巴尼亚语 |
+| 70 | Amharic | 阿姆哈拉语 |
+| 71 | Assamese | 阿萨姆语 |
+| 72 | Basque | 巴斯克语 |
+| 73 | Burmese | 缅甸语 |
+| 74 | Cebuano | 宿务语 |
+| 75 | Corsican | 科西嘉语 |
+| 76 | Esperanto | 世界语 |
+| 77 | Frisian | 弗里西语 |
+| 78 | Haitian Creole | 海地克里奥尔语 |
+| 79 | Hausa | 豪萨语 |
+| 80 | Hawaiian | 夏威夷语 |
+| 81 | Hmong | 苗语 |
+| 82 | Igbo | 伊博语 |
+| 83 | Irish | 爱尔兰语 |
+| 84 | Javanese | 爪哇语 |
+| 85 | Khmer | 柬埔寨语 |
+| 86 | Kurdish | 库尔德语 |
+| 87 | Lao | 老挝语 |
+| 88 | Latin | 拉丁语 |
+| 89 | Luxembourgish | 卢森堡语 |
+| 90 | Malagasy | 马达加斯加语 |
+| 91 | Nyanja | 尼扬贾语 |
+| 92 | Odia | 奥里亚语 |
+| 93 | Pashto | 普什图语 |
+| 94 | Samoan | 萨摩亚语 |
+| 95 | Scots Gaelic | 苏格兰盖尔语 |
+| 96 | Sesotho | 索托语 |
+| 97 | Shona | 绍纳语 |
+| 98 | Somali | 索马里语 |
+| 99 | Yoruba | 约鲁巴语 |
+
+> **Note**: The performance and accuracy may vary across different languages. Generally, Whisper performs better on languages that were well-represented in its training data, with English having the highest accuracy due to the abundance of English training data.
